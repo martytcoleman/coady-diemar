@@ -1,16 +1,38 @@
 'use client';
 
 import { Globe } from "@/components/magicui/globe";
+import { ShineBorder } from "@/components/magicui/shine-border";
+import { Leaf, HeartPulse, Factory, Briefcase } from 'lucide-react';
 import { useEffect } from 'react';
 
 const industries = [
-  "Cleantech & Mobility",
-  "Healthcare",
-  "Industrials",
-  "Business Services & Software"
+  {
+    title: "Cleantech & Mobility",
+    blurb:
+      "Energy transition, electrification, and efficiency solutions across power, clean fuels, EV infrastructure, storage, and advanced mobility ecosystems.",
+    icon: Leaf,
+  },
+  {
+    title: "Healthcare",
+    blurb:
+      "Tools, services, and technologies enabling value-based care, life sciences innovation, digital health, and outsourced pharma services.",
+    icon: HeartPulse,
+  },
+  {
+    title: "Industrials",
+    blurb:
+      "Engineered products, automation, environmental services, and tech-enabled industrial platforms driving operational excellence and sustainability.",
+    icon: Factory,
+  },
+  {
+    title: "Business Services & Software",
+    blurb:
+      "Vertical software, data & analytics, tech-enabled services, and information services delivering mission-critical outcomes for enterprises.",
+    icon: Briefcase,
+  },
 ];
 
-// Globe configuration for financial markets
+// Globe configuration (New York headquarters)
 const GLOBE_CONFIG = {
   width: 600,
   height: 600,
@@ -26,17 +48,7 @@ const GLOBE_CONFIG = {
   markerColor: [212/255, 175/255, 122/255] as [number, number, number], // Brand accent color
   glowColor: [0.1, 0.2, 0.4] as [number, number, number],
   markers: [
-    // Major Financial Centers
-    { location: [40.7589, -73.9851] as [number, number], size: 0.08 }, // New York
-    { location: [51.5074, -0.1278] as [number, number], size: 0.08 },   // London
-    { location: [35.6762, 139.6503] as [number, number], size: 0.07 },  // Tokyo
-    { location: [22.3193, 114.1694] as [number, number], size: 0.06 },  // Hong Kong
-    { location: [1.3521, 103.8198] as [number, number], size: 0.06 },   // Singapore
-    { location: [50.1109, 8.6821] as [number, number], size: 0.05 },    // Frankfurt
-    { location: [47.3769, 8.5417] as [number, number], size: 0.05 },    // Zurich
-    { location: [43.6532, -79.3832] as [number, number], size: 0.04 },  // Toronto
-    { location: [37.7749, -122.4194] as [number, number], size: 0.04 }, // San Francisco
-    { location: [-33.8688, 151.2093] as [number, number], size: 0.04 }, // Sydney
+    { location: [40.7589, -73.9851] as [number, number], size: 0.15 }, // New York headquarters
   ],
 };
 
@@ -55,56 +67,55 @@ export default function IndustryFocusPage() {
           </p>
         </div>
 
-        {/* Global Reach Section with Globe */}
-        <div className="mb-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-brand-primary mb-6">GLOBAL REACH</h2>
-              <div className="w-20 h-1 bg-brand-accent mb-6"></div>
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                Our extensive network spans major financial centers worldwide, enabling us to deliver comprehensive M&A advisory services across international markets. We leverage deep relationships with global institutional investors, strategic acquirers, and industry leaders.
-              </p>
-              <div className="grid grid-cols-2 gap-4 text-sm text-brand-secondary">
-                <div>
-                  <h4 className="font-semibold text-brand-primary mb-2">North America</h4>
-                  <ul className="space-y-1">
-                    <li>• New York</li>
-                    <li>• San Francisco</li>
-                    <li>• Toronto</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-brand-primary mb-2">Europe</h4>
-                  <ul className="space-y-1">
-                    <li>• London</li>
-                    <li>• Frankfurt</li>
-                    <li>• Zurich</li>
-                  </ul>
-                </div>
-                <div className="col-span-2">
-                  <h4 className="font-semibold text-brand-primary mb-2">Asia Pacific</h4>
-                  <ul className="space-y-1">
-                    <li>• Tokyo • Hong Kong • Singapore • Sydney</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="relative h-[500px] flex items-center justify-center">
-              <Globe className="max-w-md" config={GLOBE_CONFIG} />
-            </div>
-          </div>
-        </div>
+        {/* Removed global section (firm operates in New York only) */}
 
         <p className="text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto mb-16">
           We serve clients in select industries and sectors where we possess deep industry knowledge, extensive relationships and substantial transaction experience. Our capabilities and insights reflect years of industry specialization as investment bankers at major Wall Street firms and as operating executives of leading companies in our focus industries. This combination of industry specific transactional experience and operational expertise enhances the quality and actionability of our advice and execution.
         </p>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-          {industries.map((industry) => (
-            <div key={industry} className="bg-neutral-light border border-gray-200 p-8 rounded-lg text-center flex items-center justify-center shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-              <h3 className="font-bold text-xl text-brand-primary">{industry}</h3>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {industries.map((industry) => {
+            const Icon = industry.icon;
+            return (
+              <div
+                key={industry.title}
+                className="relative overflow-hidden rounded-2xl bg-neutral-light p-6 text-left shadow-sm ring-1 ring-gray-200 transition-all hover:-translate-y-1 hover:shadow-xl"
+              >
+                <ShineBorder className="rounded-2xl" borderWidth={2} duration={10} shineColor={["#B9975B", "#0A2342", "#B9975B"]} />
+                <div className="relative z-10">
+                  <div className="mb-3 inline-flex items-center justify-center rounded-full bg-white p-3 ring-1 ring-gray-200">
+                    <Icon className="h-5 w-5 text-brand-accent" />
+                  </div>
+                  <h3 className="font-bold text-lg text-brand-primary">{industry.title}</h3>
+                  <p className="mt-2 text-sm text-gray-700 leading-relaxed">{industry.blurb}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {/* New York headquarters section */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        <div className="mt-20 grid items-center gap-12 lg:grid-cols-2">
+          <div className="order-2 lg:order-1">
+            <h2 className="text-3xl font-bold text-brand-primary mb-3">HEADQUARTERS</h2>
+            <div className="w-20 h-1 bg-brand-accent mb-6"></div>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-xl font-semibold text-brand-primary mb-2">New York Office</h3>
+                <div className="text-lg text-gray-700 leading-relaxed">
+                  <p className="mb-1">270 Lafayette, Suite 204</p>
+                  <p className="mb-3">New York, New York 10012</p>
+                  <p className="text-base text-gray-600">
+                    Strategically located in SoHo, providing unmatched access to founders, management teams, and investors across the Northeast corridor.
+                  </p>
+                </div>
+              </div>
             </div>
-          ))}
+          </div>
+          <div className="order-1 lg:order-2 relative h-[420px] flex items-center justify-center">
+            <Globe className="max-w-md" config={GLOBE_CONFIG} />
+          </div>
         </div>
       </div>
     </div>
